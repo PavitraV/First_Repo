@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>
+		SUPER STORE CLOTHING
+	</title>
+</head>
+<body>
+	<!--table border="1">
+		{% for i in loading.all %}
+		<tr>
+		 <td>{{i.Category}}</td>
+		</tr>
+		{% endfor %}
+	</table-->
+	<form action= "testing\viewData" method = "POST">
+		<select id="dropdown">
+			<!--option value="Please select">Please select</option-->
+			<!--optgroup label="Category" selected>
+	
+			{% for i in loading.all %}
+					<option value={{i.Category}}>{{i.Category}}</option>
+				{% endfor %}
+			</optgroup-->
+		</select>
+	</form>
+</body>
+	<script type="text/javascript">
+		var x = {{loading|safe}};
+		
+		var y = document.getElementById("dropdown");
+	    for(i =0;i<x.length;i++)
+	    {	
+	    	console.log(i)
+	    	var option = document.createElement("option");
+	    	option.text = x[i].Category
+	    	y.add(option);
+	    }
+	        	
+	</script>
+</html>

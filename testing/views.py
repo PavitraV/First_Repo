@@ -6,9 +6,27 @@ import json
 # connection.connection.text_factory = lambda x: (x, "utf-8", "ignore")
 # Create your views here.
 from django.http import HttpResponse
+from django.http import JsonResponse
 
 def index(request):
     return HttpResponse("Hello, world. You're at the polls index.")
+
+def getSuggestions(request):
+	result = None
+	val = request.GET['q']
+	print(request)
+	print(val)
+	if val is not None:
+		response_data = {}
+		result = Load.objects.filter(Region__icontains=val).values('Region').distinct()
+		print("solutions found")
+	else:
+		response_data = {}
+		response_data['result'] = 'error'
+		response_data['message'] = 'Some error message'
+		result = response_data
+	result = json.dumps(list(result))
+	return JsonResponse(result,safe=False)
 
 def loadData(request):
 	csv_filepathname = "C:\Users\Pavitra\Downloads\Test.csv"
